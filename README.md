@@ -67,8 +67,7 @@ Ejemplo de consulta:
 Método: POST
 
 Cuerpo (Request Body):
-json
-Copiar código
+
 {
     "nombre": "Producto C",
     "precio": 200.0,
