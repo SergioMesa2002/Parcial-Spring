@@ -3,7 +3,9 @@ package com.example.sistema_ventas_inventario.controller;
 import com.example.sistema_ventas_inventario.model.Venta;
 import com.example.sistema_ventas_inventario.service.VentaService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,7 +27,15 @@ public class VentaController {
         return ventaService.obtenerTodas();
     }
 
-    @Operation(summary = "Crear una nueva venta", description = "Crea una venta en el sistema")
+    @Operation(summary = "Crear una nueva venta", description = "Crea una venta en el sistema",
+            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = Venta.class,
+                                    example = "{\"fecha\": \"2024-11-28\", \"producto\": {\"id\": 1}, \"cantidad\": 2, \"total\": 200.0}")
+                    )
+            )
+    )
     @ApiResponse(responseCode = "201", description = "Venta creada con éxito")
     @PostMapping
     public Venta crearVenta(@RequestBody Venta venta) {

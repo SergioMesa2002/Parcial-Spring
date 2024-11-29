@@ -3,7 +3,9 @@ package com.example.sistema_ventas_inventario.controller;
 import com.example.sistema_ventas_inventario.model.Producto;
 import com.example.sistema_ventas_inventario.service.ProductoService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,7 +27,15 @@ public class ProductoController {
         return productoService.obtenerTodos();
     }
 
-    @Operation(summary = "Crear un nuevo producto", description = "Crea un producto en el sistema")
+    @Operation(summary = "Crear un nuevo producto", description = "Crea un producto en el sistema",
+            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = Producto.class,
+                                    example = "{\"nombre\": \"Producto A\", \"precio\": 100.0, \"stock\": 50}")
+                    )
+            )
+    )
     @ApiResponse(responseCode = "201", description = "Producto creado con éxito")
     @PostMapping
     public Producto crearProducto(@RequestBody Producto producto) {
