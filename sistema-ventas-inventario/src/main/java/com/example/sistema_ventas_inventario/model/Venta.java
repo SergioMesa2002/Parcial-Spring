@@ -1,12 +1,11 @@
 package com.example.sistema_ventas_inventario.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
 import java.time.LocalDate;
 
-@Data
 @Entity
 public class Venta {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,4 +18,15 @@ public class Venta {
 
     private int cantidad;
     private double total;
+
+    // Getter y Setter manual para 'id'
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    // Otros getters y setters generados automáticamente o manualmente para los otros campos
 }

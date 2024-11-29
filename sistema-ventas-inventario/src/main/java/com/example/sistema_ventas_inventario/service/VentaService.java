@@ -22,4 +22,9 @@ public class VentaService {
     public Venta guardar(Venta venta) {
         return ventaRepository.save(venta);
     }
+
+    // Método para eliminar una venta por su ID
+    public void eliminar(Long id) {
+        ventaRepository.deleteById(id);  // Esto elimina la venta usando el ID
+    }
 }
